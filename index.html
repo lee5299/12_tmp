@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>자기소개</title>
+<link rel="stylesheet" href="style.css">
+<style>
+  .pub { font-family: var(--font-serif); }
+  .wrap { max-width: var(--page-max); margin: 0 auto; padding: 0 24px; }
+  .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 12px; padding-top: 32px; font-family: var(--font-sans); }
+  .top .name { font-size: 14px; font-weight: 500; }
+  .top nav { display: flex; flex-wrap: wrap; gap: 24px; font-size: 13px; }
+  .top nav a, .entries a { text-decoration: none; }
+  .top nav a { color: var(--ink-soft); }
+  .hero { padding-top: 112px; padding-bottom: 96px; }
+  .hero h1 { margin: 0; max-width: 760px; font-size: clamp(28px, 5vw, 40px); line-height: 1.4; font-weight: 500; letter-spacing: -0.01em; }
+  .hero .lead { margin: 24px 0 0; max-width: 560px; font-size: 17px; line-height: 1.9; color: var(--ink-soft); }
+  .entries { margin-top: 72px; border-top: 1px solid var(--rule); display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  .entries a { padding: 20px 16px; display: flex; flex-direction: column; gap: 4px; border-right: 1px solid var(--rule); }
+  .entries a:first-child { padding-left: 0; }
+  .entries a:last-child { border-right: 0; }
+  .entries b { font-size: 18px; font-weight: 500; }
+  .entries span { font-family: var(--font-sans); font-size: 12px; color: var(--ink-faint); }
+  section.block { padding: 72px 0; border-top: 1px solid var(--rule); }
+  section.block h2 { margin: 0 0 48px; font-size: 22px; line-height: 1.5; font-weight: 500; }
+  .scene { display: flex; flex-wrap: wrap; gap: 8px 48px; }
+  .scene + .scene { margin-top: 56px; }
+  .scene .when { flex: 0 0 168px; display: flex; flex-direction: column; gap: 4px; }
+  .scene .when b { font-size: 15px; font-weight: 500; }
+  .scene .when span { font-family: var(--font-sans); font-size: 12px; color: var(--ink-faint); }
+  .scene .text { flex: 1 1 480px; max-width: var(--measure); display: flex; flex-direction: column; gap: 20px; }
+  .scene p { margin: 0; font-size: 17px; line-height: 1.95; }
+  .paired { border-top: 1px solid var(--rule); padding-top: 12px; font-family: var(--font-sans); font-size: 12px; line-height: 1.6; color: var(--ink-faint); }
+  .paired b { color: var(--accent); font-weight: 500; margin-right: 8px; }
+  .numbers { background: var(--paper-band); border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); }
+  .numbers section.block { border-top: 0; }
+  .num-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 32px; }
+  .num { display: flex; flex-direction: column; gap: 8px; border-top: 1px solid var(--rule-strong); padding-top: 16px; }
+  .num .v { font-size: 36px; line-height: 1.1; }
+  .num .v small { font-size: 17px; }
+  .num .l { font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+  .num .s { font-family: var(--font-sans); font-size: 12px; line-height: 1.6; color: var(--ink-faint); }
+  .works { display: flex; flex-wrap: wrap; gap: 48px; }
+  .work { flex: 1 1 400px; display: flex; flex-direction: column; gap: 12px; border-top: 1px solid var(--rule-strong); padding-top: 20px; }
+  .work.planned { border-top-style: dashed; }
+  .work .k { font-family: var(--font-sans); font-size: 12px; color: var(--ink-faint); }
+  .work .t { font-size: 22px; line-height: 1.5; font-weight: 500; }
+  .work p { margin: 0; font-size: 15px; line-height: 1.8; color: var(--ink-soft); }
+  .work a { font-family: var(--font-sans); font-size: 13px; font-weight: 500; color: var(--accent); text-underline-offset: 4px; }
+  .docs { display: flex; flex-wrap: wrap; gap: 48px; }
+  .docs ul { list-style: none; margin: 0; padding: 0; flex: 1 1 400px; }
+  .docs li { border-top: 1px solid var(--rule); padding: 14px 0; display: flex; justify-content: space-between; gap: 16px; font-size: 17px; }
+  .docs li:last-child { border-bottom: 1px solid var(--rule); }
+  .docs li span { font-family: var(--font-sans); font-size: 12px; color: var(--ink-faint); }
+  .contact { flex: 1 1 320px; display: flex; flex-direction: column; justify-content: flex-end; gap: 8px; }
+  .contact .k { font-family: var(--font-sans); font-size: 12px; color: var(--ink-faint); }
+  .todo { color: var(--ink-faint); }
+  footer { padding: 0 0 40px; font-family: var(--font-sans); font-size: 12px; color: var(--ink-faint); }
+  @media (max-width: 640px) {
+    .wrap { padding: 0 16px; }
+    .hero { padding-top: 64px; padding-bottom: 56px; }
+    .entries { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .entries a { padding: 16px 12px; border-bottom: 1px solid var(--rule); }
+    .entries a:nth-child(odd) { padding-left: 0; }
+    .entries a:nth-child(2) { border-right: 0; }
+    section.block { padding: 56px 0; }
+  }
+</style>
+</head>
+<body class="pub">
+<div id="page"><p class="wrap" style="padding-top:40px;">불러오는 중…</p></div>
+<noscript><p class="wrap">이 페이지는 JavaScript가 필요합니다.</p></noscript>
+<script src="public-data.js"></script>
+<script>
+(function () {
+  'use strict';
+  var D = window.PUBLIC_DATA;
+  var root = document.getElementById('page');
+  if (!D) { root.innerHTML = '<p class="wrap">public-data.js가 없습니다. <code>node tools/build.js</code>를 먼저 실행하세요.</p>'; return; }
+  var S = D.story || {};
+  var esc = function (s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); };
+  var todo = function (t) { return '<span class="todo">[' + esc(t) + ']</span>'; };
+  var fmt = function (iso) { if (!/^\d{4}-\d{2}-\d{2}$/.test(iso || '')) return iso || ''; var p = iso.split('-'); return Number(p[0]) + '. ' + Number(p[1]) + '. ' + Number(p[2]) + '.'; };
+  var paras = function (t) { return String(t || '').split(/\n\s*\n/).map(function (x) { return x.trim(); }).filter(Boolean).map(function (x) { return '<p>' + esc(x).replace(/\n/g, '<br>') + '</p>'; }).join(''); };
+  var places = {}; D.storyPlaces.forEach(function (p) { places[p.id] = p.name; });
+  var name = S.name || D.student || '';
+  document.title = name ? name + ' · 자기소개' : '자기소개';
+
+  var metrics = D.metrics.filter(function (m) { return m.shown; });
+  var safeUrl = function (u) { var x = String(u || '').trim(); if (!x) return ''; if (/^(https?:|mailto:)/i.test(x)) return x; if (/^[a-z][a-z0-9+.-]*:/i.test(x)) return ''; return x; };
+  var paired = D.metrics.filter(function (m) { return m.id === (S.pairedMetric || {}).metricId; })[0];
+
+  var secs = (S.sections || []).filter(function (s) { return s.text || !s.optional; });
+  var story = secs.map(function (s, i) {
+    var text = paras(s.text);
+    if (i === 0 && S.firstSentence) text = '<p>' + esc(S.firstSentence) + '</p>' + text;
+    if (i === secs.length - 1 && S.lastSentence) text += '<p>' + esc(S.lastSentence) + '</p>';
+    if (!text) text = '<p>' + todo(places[s.place] + ' 본문 작성 예정') + '</p>';
+    var pair = (s.place === 'hardship' && paired && paired.value !== null) ?
+      '<div class="paired"><b>' + esc(S.pairedMetric.note || '숫자') + '</b>' + (paired.period ? esc(paired.period.text) + ' · ' : '') + esc(paired.label) + ' ' + esc(paired.value) + esc(paired.unit) + ' · 출처: ' + esc(paired.source) + '</div>' : '';
+    return '<article class="scene"><div class="when"><b>' + (s.dateLabel ? esc(s.dateLabel) : todo('날짜')) + '</b><span>' + esc(places[s.place] || '') + '</span></div><div class="text">' + text + pair + '</div></article>';
+  }).join('');
+
+  var W = S.works || {}; var P = W.paper || {}; var A = W.app || {};
+  var docs = (S.documents || []).map(function (d) {
+    var u = safeUrl(d.url);
+    return '<li>' + (u ? '<a href="' + esc(u) + '" download>' + esc(d.name) + '</a>' : esc(d.name)) + '<span>' + (d.format ? esc(d.format) : u ? '' : '준비 중') + '</span></li>';
+  }).join('');
+
+  root.innerHTML =
+    '<header class="wrap top"><span class="name">' + (name ? esc(name) : todo('이름')) + '</span>' +
+    '<nav aria-label="구역 바로가기"><a href="#story">이야기</a><a href="#numbers">숫자</a><a href="#works">대표작</a><a href="#docs">이력서</a></nav></header>' +
+    '<main>' +
+    '<section class="wrap hero"><h1>' + (S.oneLiner ? esc(S.oneLiner) : todo('한 줄 소개 — "…한 사람"으로 끝나는 문장')) + '</h1>' +
+    (S.lead ? '<p class="lead">' + esc(S.lead) + '</p>' : '') +
+    '<nav class="entries" aria-label="들어가기"><a href="#story"><b>이야기</b><span>고난에서 지금까지</span></a><a href="#numbers"><b>숫자</b><span>출처가 있는 기록</span></a><a href="#works"><b>대표작</b><span>논문과 앱</span></a><a href="#docs"><b>이력서</b><span>문서와 연락</span></a></nav></section>' +
+    '<div class="wrap"><section class="block" id="story"><h2>이야기</h2>' + story + '</section></div>' +
+    '<div class="numbers" id="numbers"><div class="wrap"><section class="block"><h2>숫자</h2><div class="num-grid">' +
+    (metrics.length ? metrics.map(function (m) {
+      return '<div class="num"><span class="v">' + esc(m.value) + '<small>' + esc(m.unit) + '</small></span><span class="l">' + esc(m.label) + '</span><span class="s">출처: ' + esc(m.source) + (m.period ? ' · ' + esc(m.period.text) : '') + (m.detail ? '<br>' + esc(m.detail) : '') + '</span></div>';
+    }).join('') : '<p>' + todo('숫자 준비 중') + '</p>') + '</div></section></div></div>' +
+    '<div class="wrap"><section class="block" id="works" style="border-top:0;"><h2>대표작</h2><div class="works">' +
+    '<div class="work"><span class="k">10번 논문' + (P.date ? ' · ' + esc(fmt(P.date)) : '') + '</span><span class="t">' + (P.title ? esc(P.title) : todo('10번 논문 제목')) + '</span>' + (P.summary ? '<p>' + esc(P.summary) + '</p>' : '') + (P.resultLine ? '<p>' + esc(P.resultLine) + '</p>' : '') +
+    (safeUrl(P.url) ? '<a href="' + esc(safeUrl(P.url)) + '" download>' + esc(P.linkLabel || '논문 읽기') + '</a>' : '') + (P.originalTitle ? '<span class="k">원제: ' + esc(P.originalTitle) + '</span>' : '') + '</div>' +
+    '<div class="work planned"><span class="k">앱</span><span class="t" style="color:var(--ink-soft);">' + (A.title ? esc(A.title) : '13번 앱') + '</span>' + (A.summary ? '<p>' + esc(A.summary) + '</p>' : '') +
+    '<span class="k">' + (A.plannedDate ? '예정일 ' + esc(fmt(A.plannedDate)) + (A.plannedNote ? ' (' + esc(A.plannedNote) + ')' : '') : '예정') + '</span></div>' +
+    '</div></section></div>' +
+    '<div class="wrap"><section class="block" id="docs"><div class="docs"><div style="flex:1 1 400px;"><h2 style="margin-bottom:32px;">문서와 연락</h2><ul>' + docs + '</ul></div>' +
+    '<div class="contact"><span class="k">연락</span><span style="font-size:17px;">' + (S.contact ? esc(S.contact) : todo('souther95@gmail.com')) + '</span></div></div></section></div>' +
+    '</main><footer class="wrap">© 2026 ' + esc(name) + '</footer>';
+})();
+</script>
+</body>
+</html>
